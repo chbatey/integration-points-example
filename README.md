@@ -15,7 +15,7 @@ Sound complicated? I am not surprised, here's a simpleish example.
 
 An integrating example application tht calls out to three dependencies.
 
-<img src="https://raw.githubusercontent.com/chbatey/integration-points-example/master/images/Integration-Points-Architecture.png">
+<img src="https://raw.githubusercontent.com/chbatey/integration-points-example/master/images/Integration-Points-Architecture.png" />
 
 The dependencies are:
 
@@ -35,8 +35,59 @@ Each callout from the integrating application uses a TenacityCommand, and all th
 
 ### Running the example
 
+Before you get started clone this project and get a terminal ready with three tabs / windows. The only system depdendency is Java.
+
 The example is made up of three processes:
 
 * The actual application
 * An instance of wiremock instance that mocks all three depdencies
 * An instance of Breakerbox that monitors and can be used to configure the integration points
+
+#### Starting Wiremock (the dependencies)
+
+The bundles wiremock is configured to run on port 9090
+
+```
+cd wiremock
+./startWiremock.sh
+```
+
+You should see output like:
+
+```
+2014-08-02 15:36:00.000:INFO::Started DelayableSocketConnector@0.0.0.0:9090
+```
+
+You can verify it is up by going to [http://localhost:9090/__admin](http://localhost:9090/__admin)
+
+Which will show you the URLs and responses wiremock is configured with.
+
+#### Starting the actual application
+
+The applicatiom by default runs on port 7070.
+
+First build the application with the following:
+
+```
+mvn clean package
+```
+
+Then run the application:
+```
+java -jar ./target/integration-example-1.0-SNAPSHOT.jar server integration-example.yml
+```
+
+Alternatively if you want the project inside an IDE then just run the main class: IntegrationApplication with the same arguments.
+
+You'll see a stacktrace, don't worry about this. It is because we have't started breakerbox yet and it calls out periodically to get any configuration updates.
+
+#### Running Breakerbox
+
+Like for wiremock there is a helper script to start it up. It will run on port 8080.
+
+```
+cd breakerbox
+./runBreakerbox.sh
+```
+
+Then go to http://localhost:8080
