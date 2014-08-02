@@ -1,20 +1,30 @@
 package info.batey.examples.integration.points.device;
 
 import com.yammer.tenacity.core.TenacityCommand;
-import com.yammer.tenacity.core.properties.TenacityPropertyKey;
 import info.batey.examples.integration.points.IntegrationPoints;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.util.EntityUtils;
 
-/**
- * Created by chbatey on 01/08/2014.
- */
 public class DeviceServiceDependency extends TenacityCommand<String> {
-    public DeviceServiceDependency() {
+
+    private HttpClient httpClient;
+
+    public DeviceServiceDependency(HttpClient httpClient) {
         super(IntegrationPoints.DEVICE_SERVICE_GET);
+        this.httpClient = httpClient;
     }
 
     @Override
     public String run() throws Exception {
-        Thread.sleep(5  * 1000);
-        return "what an awesome device";
+        HttpGet getDeviceInfo = new HttpGet("http://localhost:9090/device/chris-iphone");
+        HttpResponse deviceResponse = httpClient.execute(getDeviceInfo);
+        int statusCode = deviceResponse.getStatusLine().getStatusCode();
+        if (statusCode != 200) {
+            throw new RuntimeException("Oh dear no device information, status code " + statusCode);
+        }
+        String deviceInfo = EntityUtils.toString(deviceResponse.getEntity());
+        return deviceInfo;
     }
 }

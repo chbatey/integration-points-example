@@ -8,6 +8,8 @@ server:
 
 deviceServiceHost: localhost:5051
 
+
+
 breakerboxConfiguration:
      urls: http://localhost:8080/archaius/integration-example
      initialDelay: 5s
