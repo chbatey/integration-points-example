@@ -13,7 +13,7 @@ Sound complicated? I am not surprised, here's a simpleish example.
 
 ### The scenario
 
-An integrating example application tht calls out to three dependencies.
+This example has an simple web application that calls out to three other web applications.
 
 <img src="https://raw.githubusercontent.com/chbatey/integration-points-example/master/images/Integration-Points-Architecture.png" />
 
