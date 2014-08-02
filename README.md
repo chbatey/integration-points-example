@@ -13,4 +13,4 @@ Sound complicated? I am not surprised.
 
 Here is a simple example application that uses all of the above to monitor three integration points.
 
-<img src="https://chbatey.github.com/integration-points-example/images/Integration-Points-Architecture.png">
+<img src="https://raw.githubusercontent.com/chbatey/integration-points-example/master/images/Integration-Points-Architecture.png">
