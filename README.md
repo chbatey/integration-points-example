@@ -45,7 +45,8 @@ The example is made up of three processes:
 
 #### Starting Wiremock (the dependencies)
 
-The bundles wiremock is configured to run on port 9090
+The bundles wiremock is configured to run on port 9090:
+
 
 ```
 cd wiremock
@@ -53,6 +54,7 @@ cd wiremock
 ```
 
 You should see output like:
+
 
 ```
 2014-08-02 15:36:00.000:INFO::Started DelayableSocketConnector@0.0.0.0:9090
@@ -85,9 +87,22 @@ You'll see a stacktrace, don't worry about this. It is because we have't started
 
 Like for wiremock there is a helper script to start it up. It will run on port 8080.
 
+
 ```
 cd breakerbox
 ./runBreakerbox.sh
 ```
 
 Then go to http://localhost:8080
+
+You should see a dashboard with some Loading... signs. That is because the application hasn't published any statistics yet.
+
+You can go to Dashboard -> Breakerbox to see some data. This is breakerbox monitoring its self, how weird!
+
+Now lets go to our Dashboard -> Integration Example.
+
+Then hit http://localhost:7070/integrate and the dashboard should come to life.
+
+<img src="https://raw.githubusercontent.com/chbatey/integration-points-example/master/images/dashboard.png" />
+
+For informaton on what the dashboard is showing, go to the Hystrix website.
