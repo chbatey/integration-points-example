@@ -5,7 +5,7 @@ In a micro/mini/somewhat-medium service architecture nearly every application yo
 
 To be reliable you need to handle the failure of your dependencies either by failing quickly or having a fallback strategy.
 
-Netflix have a great library, [Hystrix](https://github.com/Netflix/Hystrix), for wrapping depenencies with their own thread pool, timeout and [circuit breaker](http://martinfowler.com/bliki/CircuitBreaker.html).
+Netflix have a great library, [Hystrix](https://github.com/Netflix/Hystrix), for wrapping dependencies with their own thread pool, timeout and [circuit breaker](http://martinfowler.com/bliki/CircuitBreaker.html).
 
 Yammer have built on that with [Tenacity](https://github.com/yammer/tenacity), a library for integrating Hystrix with Dropwizard. Lastly you can add [Breakerbox](https://github.com/yammer/breakerbox), which enables you to dynamically configure the thread pools, timeouts and thresholds that trigger the circuit breakers.
 
@@ -13,7 +13,7 @@ Sound complicated? I am not surprised, so here's a simpleish example.
 
 ### The scenario
 
-This example has an simple web application which calls out to three other web applications.
+This example features a simple web application which calls out to three other HTTP services.
 
 <img src="https://raw.githubusercontent.com/chbatey/integration-points-example/master/images/Integration-Points-Architecture.png" />
 
@@ -31,16 +31,16 @@ The three dependencies are mocked using wiremock and are on the following URLs:
 * /device/chris-iphone - returns a description of a device
 * /pincheck - returns a string true or false
 
-Each callout from the integrating application uses a TenacityCommand and all the depdendencies are registered with Tenacity which allows them to be monitored and configured by Breakerbox.
+Each callout from the integrating application uses a TenacityCommand and all the dependencies are registered with Tenacity which allows them to be monitored and configured by Breakerbox.
 
 ### Running the example
 
-Before you get started clone this project and get a terminal ready with three tabs / windows. The only system dependencies are Java + Maven.
+Before you get started, clone this project and have a terminal ready with three tabs or windows. The only system dependencies are Java and Maven.
 
 The example is made up of three processes:
 
 * The integrating application
-* An instance of wiremock instance that mocks all three depdencies
+* An instance of wiremock that mocks all three dependencies
 * An instance of breakerbox that monitors and can be used to configure the integration points
 
 #### Starting Wiremock (the dependencies)
