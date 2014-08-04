@@ -60,33 +60,32 @@ You should see output like:
 2014-08-02 15:36:00.000:INFO::Started DelayableSocketConnector@0.0.0.0:9090
 ```
 
-You can verify it is up by going to [http://localhost:9090/__admin](http://localhost:9090/__admin)
+You can verify that it is up by going to [http://localhost:9090/__admin](http://localhost:9090/__admin). This page shows all the default wiremock responses for the three dependencies.
 
-Which will show you the URLs and responses wiremock is configured with.
 
 #### Starting the actual application
 
-The applicatiom by default runs on port 7070 and has a single endpoint: /integrate
+By default the application runs on port 7070 and has a single endpoint: /integrate
 
-First build the application with the following:
+Firstly, build the application with the following command:
 
 ```
 mvn clean package
 ```
 
-Then run the application:
+Then to run the application:
 
 ```
 java -jar ./target/integration-example-1.0-SNAPSHOT.jar server integration-example.yml
 ```
 
-Alternatively if you want the project inside an IDE then just run the main class: IntegrationApplication with the same arguments.
+Alternatively if you are using an IDE then just run the main class: IntegrationApplication with the same arguments.
 
-You'll see a stacktrace, don't worry about this. It is because we have't started breakerbox yet and the application calls out periodically to get any configuration updates.
+You will see a stacktrace; don't worry about this. This is because our application polls breaker box for configuration updates, but we have not yet started breakerbox.
 
 #### Running Breakerbox
 
-Like for wiremock there is a helper script to start it up. It will run on port 8080.
+Like for wiremock there is a helper script to start breakerbox. It will run on port 8080.
 
 
 ```
@@ -94,15 +93,15 @@ cd breakerbox
 ./runBreakerbox.sh
 ```
 
-Then go to http://localhost:8080
+Then go to (http://localhost:8080)[http://localhost:8080]
 
-You should see a dashboard with some Loading... signs. That is because the application hasn't published any statistics yet.
+Because the application has not yet published any statistics, you should see a dashboard with "Loading...". 
 
-You can go to Dashboard -> Breakerbox to see some data. This is breakerbox monitoring its self, how weird!
+To see some data go to Dashboard -> Breakerbox. This is breakerbox monitoring itself, how weird!
 
-Now lets go to our Dashboard -> Integration Example.
+Now let's go to our Dashboard -> Integration Example.
 
-Then hit http://localhost:7070/integrate and the dashboard should come to life.
+Then hit [http://localhost:7070/integrate](http://localhost:7070/integrate) and the dashboard should come to life.
 
 <img src="https://raw.githubusercontent.com/chbatey/integration-points-example/master/images/dashboard.png" />
 
