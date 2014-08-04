@@ -1,19 +1,19 @@
 Integration Points Example
 ==========================
 
-In a micro/mini/some what medium service architecture nearly every application you write tends to depend on other HTTP services, databases, third party libraries, etc.
+In a micro/mini/somewhat-medium service architecture nearly every application you write tends to depend on other HTTP services, databases, third party libraries, etc.
 
-To be reliable you need to handle the failure of your dependencies by either failing quickly or having a fallback response.
+To be reliable you need to handle the failure of your dependencies either by failing quickly or having a fallback strategy.
 
-Netflix have a great library, Hystrix, for wrapping depenencies with their own thread pool, timeout and circuit breaker.
+Netflix have a great library, [Hystrix](https://github.com/Netflix/Hystrix), for wrapping depenencies with their own thread pool, timeout and [circuit breaker](http://martinfowler.com/bliki/CircuitBreaker.html).
 
-Yammer have built on that with Tenacity, which is a library for integrating Hystrix with Dropwizard. And lastly Breakerbox, which enables you to dynamically configure the thread pools, timeouts and thresholds for enabling the circuit breakers.
+Yammer have built on that with [Tenacity](https://github.com/yammer/tenacity), a library for integrating Hystrix with Dropwizard. Lastly you can add Breakerbox, which enables you to dynamically configure the thread pools, timeouts and thresholds that trigger the circuit breakers.
 
-Sound complicated? I am not surprised, here's a simpleish example.
+Sound complicated? I am not surprised, so here's a simpleish example.
 
 ### The scenario
 
-This example has an simple web application that calls out to three other web applications.
+This example has an simple web application which calls out to three other web applications.
 
 <img src="https://raw.githubusercontent.com/chbatey/integration-points-example/master/images/Integration-Points-Architecture.png" />
 
@@ -27,7 +27,7 @@ In the real world this application could be checking that a user is authorised t
 
 The three dependencies are mocked using wiremock and are on the following URLs:
  
-* /user/chris - retruns a description of a user
+* /user/chris - returns a description of a user
 * /device/chris-iphone - returns a description of a device
 * /pincheck - returns a string true or false
 
