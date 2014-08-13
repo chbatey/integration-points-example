@@ -7,6 +7,7 @@ import com.yammer.tenacity.core.properties.TenacityPropertyKey;
 import com.yammer.tenacity.core.properties.TenacityPropertyRegister;
 import info.batey.examples.integration.points.IntegrationPoints;
 import info.batey.examples.integration.points.IntegrationPointsFactory;
+import info.batey.examples.integration.resources.IntegrationAsyncResource;
 import info.batey.examples.integration.resources.IntegrationResource;
 import io.dropwizard.Application;
 import io.dropwizard.client.HttpClientBuilder;
@@ -16,9 +17,6 @@ import org.apache.http.client.HttpClient;
 
 import java.util.Map;
 
-/**
- * Created by chbatey on 01/08/2014.
- */
 public class IntegrationApplication extends Application<AppConfig> {
     @Override
     public void initialize(Bootstrap<AppConfig> appConfigBootstrap) {
@@ -40,6 +38,7 @@ public class IntegrationApplication extends Application<AppConfig> {
         final HttpClient httpClient = new HttpClientBuilder(environment).using(appConfig.getHttpClient()).build("dropwizard-http-client");
 
         environment.jersey().register(new IntegrationResource(httpClient));
+        environment.jersey().register(new IntegrationAsyncResource(httpClient));
     }
 
     public static void main(String[] args) throws Exception {

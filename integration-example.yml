@@ -8,12 +8,10 @@ server:
 
 deviceServiceHost: localhost:5051
 
-
-
 breakerboxConfiguration:
      urls: http://localhost:8080/archaius/integration-example
      initialDelay: 5s
-     delay: 10s
+     delay: 2s
 
 deviceServiceTenacityConfig:
     executionIsolationThreadTimeoutInMillis: 1000
