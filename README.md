@@ -93,7 +93,7 @@ cd breakerbox
 ./runBreakerbox.sh
 ```
 
-Then go to (http://localhost:8080)[http://localhost:8080]
+Then go to [http://localhost:8080](http://localhost:8080)
 
 Because the application has not yet published any statistics, you should see a dashboard with "Loading...". 
 
